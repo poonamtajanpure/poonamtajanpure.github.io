@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poonam Tajanpure — Ph.D. Candidate, UMass Amherst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f9fd;
+      --border: #d6e6f2;
+      --text: #0f1e2d;
+      --muted: #5a7a94;
+      --accent: #1a6896;
+      --accent-light: #e8f3fb;
+      --accent-mid: #2a8fc4;
+      --water-pale: #f0f7fd;
+      --water-mid: #b8d8ee;
+      --serif: 'Source Serif 4', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--serif);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    /* Nav */
+    .nav-wrap {
+      padding: 0 48px;
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid var(--water-mid);
+    }
+    nav {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 26px 0 22px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .hamburger span { display: block; width: 20px; height: 1px; background: var(--muted); }
+    .mobile-menu {
+      display: none; flex-direction: column;
+      padding: 12px 24px 20px; background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .mobile-menu a {
+      font-family: var(--sans); font-size: 13px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      padding: 10px 0; border-bottom: 0.5px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a.active { color: var(--accent); }
+
+    /* Layout */
+    .site { max-width: 780px; margin: 0 auto; padding: 0 48px; }
+    section { display: none; padding: 64px 0 120px; }
+    section.active { display: block; }
+
+    /* Hero */
+    .hero { padding: 40px 36px 48px; border: 0.5px solid var(--border); border-radius: 4px; background: var(--water-pale); margin-bottom: 52px; }
+    .eyebrow {
+      font-family: var(--sans); font-size: 11px; font-weight: 400;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: var(--serif); font-size: 52px; font-weight: 300;
+      line-height: 1.1; letter-spacing: -0.01em; color: var(--text); margin-bottom: 28px;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-bio {
+      font-size: 17px; font-weight: 300; line-height: 1.9;
+      color: var(--muted); max-width: 600px; margin-bottom: 14px;
+    }
+    .spec-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+    .stag {
+      font-family: var(--sans); font-size: 11px; font-weight: 400;
+      letter-spacing: 0.04em; padding: 4px 13px;
+      border: 0.5px solid var(--water-mid); border-radius: 2px; color: var(--muted); background: var(--bg);
+    }
+    .hero-contact {
+      margin-top: 32px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .hero-contact a {
+      font-family: var(--sans); font-size: 13px; color: var(--accent); text-decoration: none;
+    }
+    .hero-contact a:hover { text-decoration: underline; }
+    .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+
+    /* Section head */
+    .sec-head {
+      font-family: var(--sans); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 32px;
+    }
+
+    /* Narrative prose block */
+    .prose {
+      font-size: 16px; font-weight: 300; line-height: 1.9;
+      color: var(--muted); margin-bottom: 40px; max-width: 640px;
+    }
+    .prose + .prose { margin-top: -24px; }
+
+    /* Education */
+    .edu-item {
+      display: grid; grid-template-columns: 1fr 130px; gap: 24px;
+      padding: 24px 0; border-bottom: 0.5px solid var(--border);
+    }
+    .edu-item:first-of-type { border-top: 0.5px solid var(--border); }
+    .edu-deg {
+      font-family: var(--serif); font-size: 18px; font-weight: 400;
+      color: var(--text); margin-bottom: 5px; line-height: 1.35;
+    }
+    .edu-inst { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.6; }
+    .edu-yr { font-family: var(--sans); font-size: 12px; color: var(--muted); text-align: right; padding-top: 4px; white-space: nowrap; }
+
+    /* Research cards */
+    .res-item { padding: 32px 0; border-bottom: 0.5px solid var(--border); }
+    .res-item:first-of-type { border-top: 0.5px solid var(--border); }
+    .res-item h3 {
+      font-family: var(--serif); font-size: 20px; font-weight: 400;
+      color: var(--text); margin-bottom: 10px; line-height: 1.35;
+    }
+    .res-item p { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.9; }
+    .res-tag {
+      display: inline-block; font-family: var(--sans); font-size: 10px;
+      font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--accent-mid); margin-bottom: 10px;
+    }
+
+    /* Publications */
+    .pub { padding: 28px 0; border-bottom: 0.5px solid var(--border); }
+    .pub:first-of-type { border-top: 0.5px solid var(--border); }
+    .pub-num { font-family: var(--sans); font-size: 11px; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.05em; }
+    .pub-title {
+      font-family: var(--serif); font-size: 18px; font-weight: 400; font-style: italic;
+      line-height: 1.5; color: var(--text); margin-bottom: 8px;
+    }
+    .pub-authors { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--muted); margin-bottom: 10px; }
+    .pub-status { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .badge { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.03em; padding: 3px 10px; border-radius: 2px; }
+    .badge-sub  { background: var(--accent-light); color: var(--accent); }
+    .badge-wip  { background: #eef4fa; color: #3a6a8a; }
+    .pub-journal { font-family: var(--sans); font-size: 12px; color: var(--muted); }
+    .pub-link { font-family: var(--sans); font-size: 12px; color: var(--accent); text-decoration: none; }
+    .pub-link:hover { text-decoration: underline; }
+
+    /* Conference item */
+    .conf-item { padding: 20px 0; border-bottom: 0.5px solid var(--border); }
+    .conf-item:first-of-type { border-top: 0.5px solid var(--border); }
+    .conf-title { font-family: var(--serif); font-size: 16px; font-weight: 400; font-style: italic; color: var(--text); margin-bottom: 6px; line-height: 1.45; }
+    .conf-meta { font-family: var(--sans); font-size: 13px; font-weight: 300; color: var(--muted); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .badge-talk { background: var(--accent-light); color: var(--accent); font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 9px; border-radius: 2px; }
+
+    /* Skills */
+    .sk-table { width: 100%; border-collapse: collapse; }
+    .sk-table tr { border-bottom: 0.5px solid var(--border); }
+    .sk-table tr:first-child { border-top: 0.5px solid var(--border); }
+    .sk-table td { padding: 14px 0; vertical-align: top; }
+    .sk-label {
+      font-family: var(--sans); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+      width: 160px; padding-right: 24px;
+    }
+    .sk-val { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--text); }
+
+    /* CV list items */
+    .cv-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 24px; padding: 14px 0; border-bottom: 0.5px solid var(--border);
+    }
+    .cv-item:first-of-type { border-top: 0.5px solid var(--border); }
+    .cv-item-name { font-family: var(--sans); font-size: 14px; font-weight: 300; color: var(--text); line-height: 1.6; }
+    .cv-item-yr { font-family: var(--sans); font-size: 12px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+    .cv-section { margin-top: 52px; }
+
+    /* Footer */
+    footer {
+      max-width: 100%; margin: 0; padding: 24px 48px;
+      border-top: 2px solid var(--water-mid);
+      background: var(--water-pale);
+      font-family: var(--sans); font-size: 12px; color: var(--muted);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .nav-wrap { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu.open { display: flex; }
+      .site { padding: 0 24px; }
+      section { padding: 44px 0 80px; }
+      .hero h1 { font-size: 36px; }
+      .edu-item { grid-template-columns: 1fr; gap: 4px; }
+      .edu-yr { text-align: left; }
+      footer { padding: 20px 24px 40px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav>
+    <span class="nav-name" onclick="show('about')">Poonam Tajanpure</span>
+    <ul class="nav-links">
+      <li><a href="#" class="active" onclick="show('about');return false">About</a></li>
+      <li><a href="#" onclick="show('research');return false">Research</a></li>
+      <li><a href="#" onclick="show('publications');return false">Publications</a></li>
+      <li><a href="#" onclick="show('cv');return false">CV</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</div>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" onclick="show('about');toggleMenu();return false">About</a>
+  <a href="#" onclick="show('research');toggleMenu();return false">Research</a>
+  <a href="#" onclick="show('publications');toggleMenu();return false">Publications</a>
+  <a href="#" onclick="show('cv');toggleMenu();return false">CV</a>
+</div>
+
+<div class="site">
+
+  <!-- ABOUT -->
+  <section id="about" class="active">
+    <div class="hero">
+      <!--
+        TO ADD YOUR PHOTO: save your image as photo.jpg in the same folder as this file,
+        then uncomment the line below:
+      -->
+      <!-- <img src="photo.jpg" alt="Poonam Tajanpure" style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:0.5px solid var(--border);float:right;margin:0 0 24px 40px;"> -->
+
+      <div class="eyebrow">Ph.D. Candidate &nbsp;·&nbsp; Civil &amp; Environmental Engineering &nbsp;·&nbsp; UMass Amherst</div>
+      <h1>Poonam<br><em>Tajanpure</em></h1>
+
+      <p class="hero-bio">I am a Ph.D. candidate in Civil and Environmental Engineering at the University of Massachusetts Amherst, where I work with Prof. Emily Kumpel on questions at the intersection of water infrastructure, public health, and equity.</p>
+
+      <p class="hero-bio">My dissertation — <em>From Household to Infrastructure: Empirical and Computational Approaches to Drinking Water Equity</em> — draws on field research across Indian cities and machine learning methods to understand how water systems shape the health and daily lives of the people they serve, especially children.</p>
+
+      <p class="hero-bio">Before UMass, I trained in population studies and development studies in Mumbai, and in agricultural engineering in Rahuri — a background that shapes how I think about water not just as an engineering problem, but as a question of access, equity, and lived experience.</p>
+
+      <div class="spec-tags">
+        <span class="stag">Drinking Water Quality &amp; Access</span>
+        <span class="stag">Environmental Determinants of Health</span>
+        <span class="stag">Spatial Analysis &amp; Machine Learning</span>
+        <span class="stag">WASH</span>
+      </div>
+
+      <div class="hero-contact">
+        <a href="/cdn-cgi/l/email-protection#116165707b707f6164637451647c7062623f747564"><span class="__cf_email__" data-cfemail="6d1d190c070c031d181f082d18000c1e1e43080918">[email&#160;protected]</span></a>
+        <!-- Add Google Scholar once available:
+        <div class="sep"></div>
+        <a href="https://scholar.google.com/..." target="_blank">Google Scholar</a>
+        -->
+      </div>
+    </div>
+
+    <div class="sec-head">Education</div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-deg">Ph.D., Civil Engineering</div>
+        <div class="edu-inst">University of Massachusetts Amherst<br>
+        Advisor: Prof. Emily Kumpel<br>
+        <em style="font-size:13px;color:var(--muted)">Dissertation: "From Household to Infrastructure: Empirical and Computational Approaches to Drinking Water Equity"</em></div>
+      </div>
+      <div class="edu-yr">Expected May 2027</div>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-deg">M.S., Civil Engineering</div>
+        <div class="edu-inst">University of Massachusetts Amherst</div>
+      </div>
+      <div class="edu-yr"></div>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-deg">M.P.S., Population Studies</div>
+        <div class="edu-inst">International Institute for Population Sciences (IIPS), Mumbai, India</div>
+      </div>
+      <div class="edu-yr"></div>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-deg">M.A., Development Studies</div>
+        <div class="edu-inst">Tata Institute of Social Sciences (TISS), Mumbai, India</div>
+      </div>
+      <div class="edu-yr"></div>
+    </div>
+
+    <div class="edu-item">
+      <div>
+        <div class="edu-deg">B.Tech., Agricultural Engineering</div>
+        <div class="edu-inst">Mahatma Phule Krishi Vidyapeeth (Agricultural University), Rahuri, India</div>
+      </div>
+      <div class="edu-yr"></div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+
+    <p class="prose">My work sits at the boundary of environmental engineering, public health, and data science. I use a combination of field-based methods — household surveys, spatial sampling, field data collection — and computational tools including machine learning and statistical modeling to study how water infrastructure affects health and equity.</p>
+
+    <div class="sec-head">Current projects</div>
+
+    <div class="res-item">
+      <div class="res-tag">Intermittent water supply &amp; health</div>
+      <h3>Water unpredictability and child health in urban India</h3>
+      <p>Millions of households in India receive water through intermittent piped systems — taps that run for only a few hours a day, on unpredictable schedules. My research asks: what does this unpredictability mean for children's health? Working with collaborators at UMass Amherst and NC State, I conducted household surveys across Hubli-Dharwad and led a follow-up multi-city survey (Mumbai, Nashik, Solapur) covering approximately 600 households, examining supply patterns, coping strategies, and socioeconomic impacts. The Hubli-Dharwad paper is currently under review at <em>Nature Water</em>.</p>
+    </div>
+
+    <div class="res-item">
+      <div class="res-tag">Machine learning &amp; water infrastructure</div>
+      <h3>Identifying lead service lines using machine learning</h3>
+      <p>Lead service lines — pipes connecting the water main to homes — are a major source of lead exposure in drinking water, particularly for children. Replacing them requires knowing where they are, which is often poorly documented. As part of the MassDEP Water-Smart Schools Program, I am developing and evaluating guideline-based machine learning methods that can identify lead service lines from administrative and infrastructure data. This work bridges regulatory data management and computational experimentation.</p>
+    </div>
+
+    <div class="res-item">
+      <div class="res-tag">Remote sensing &amp; resilience</div>
+      <h3>Satellite data for drought resilience and policy</h3>
+      <p>As a Graduate Fellow with the Data Science for the Public Good program at the UVA Biocomplexity Institute, I applied satellite remote sensing to analyze drought resilience in the Sahel and support economic policy decisions in Zimbabwe. This work introduced me to the potential — and the limits — of earth observation data for understanding environmental vulnerability in low-resource settings.</p>
+    </div>
+
+    <div style="margin-top: 60px">
+      <div class="sec-head">Skills &amp; methods</div>
+      <table class="sk-table">
+        <tr><td class="sk-label">Statistical</td><td class="sk-val">R, Python, STATA</td></tr>
+        <tr><td class="sk-label">GIS &amp; remote sensing</td><td class="sk-val">ArcGIS, QGIS, Google Earth Engine</td></tr>
+        <tr><td class="sk-label">Survey &amp; field</td><td class="sk-val">Kobo Toolbox, spatial sampling, multi-city field protocols</td></tr>
+        <tr><td class="sk-label">Writing</td><td class="sk-val">LaTeX, Microsoft Office</td></tr>
+        <tr><td class="sk-label">Languages</td><td class="sk-val">English (proficient) &nbsp;·&nbsp; Hindi (native) &nbsp;·&nbsp; Marathi (native)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+
+    <div class="sec-head">Working papers</div>
+
+    <div class="pub">
+      <div class="pub-num">01 &nbsp;·&nbsp; Under review</div>
+      <div class="pub-title">Unpredictability of intermittent water supply and effects on child health in Hubli-Dharwad, India</div>
+      <div class="pub-authors">Tajanpure, P., Kumpel, E., &amp; Ercumen, A.</div>
+      <div class="pub-status">
+        <span class="badge badge-sub">Revised &amp; resubmitted — Nature Water</span>
+        <span class="pub-journal">Preprint: ResearchSquare (2025)</span>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-num">02 &nbsp;·&nbsp; In progress</div>
+      <div class="pub-title">Guideline-based machine learning methods for lead service line identification: a computational experiments analysis</div>
+      <div class="pub-authors">Tajanpure, P., da-Luz, N., &amp; Kumpel, E.</div>
+      <div class="pub-status">
+        <span class="badge badge-wip">In preparation</span>
+      </div>
+    </div>
+
+    <div class="pub">
+      <div class="pub-num">03 &nbsp;·&nbsp; In progress</div>
+      <div class="pub-title">Characterizing household experiences with intermittent water supply in India</div>
+      <div class="pub-authors">Tajanpure, P. &amp; Kumpel, E.</div>
+      <div class="pub-status">
+        <span class="badge badge-wip">In preparation</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 56px">
+      <div class="sec-head">Technical reports</div>
+
+      <div class="pub">
+        <div class="pub-num">04</div>
+        <div class="pub-title">Using remote sensed data for social and economic decision making in Zimbabwe</div>
+        <div class="pub-authors">Abedine, N., Alwang, J., Chen, S., Fan, F., Liverpool, A., Navarette, J., Posadas, B., Quaye, L., &amp; Tajanpure, P.</div>
+        <div class="pub-status">
+          <span class="pub-journal">University of Virginia Biocomplexity Institute, 2022</span>
+          <!-- <a href="LINK_HERE" class="pub-link" target="_blank">View report</a> -->
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-num">05</div>
+        <div class="pub-title">Sensing drought in the Sahel for household resilience</div>
+        <div class="pub-authors">Back, C., Benami, E., Chen, S., Gupta, M., Poghosyam, A., Rudd, R., &amp; Tajanpure, P.</div>
+        <div class="pub-status">
+          <span class="pub-journal">University of Virginia Biocomplexity Institute, 2022</span>
+          <!-- <a href="LINK_HERE" class="pub-link" target="_blank">View report</a> -->
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 56px">
+      <div class="sec-head">Selected presentations</div>
+
+      <div class="conf-item">
+        <div class="conf-title">Unpredictability of intermittent water supply and children's health implications in urban India</div>
+        <div class="conf-meta">
+          <span>UNC Water and Health Conference, Chapel Hill, NC</span>
+          <span class="badge-talk">Oral presentation</span>
+          <span>October 2024</span>
+        </div>
+      </div>
+
+      <div class="conf-item">
+        <div class="conf-title">Sensing drought in the Sahel for household resilience</div>
+        <div class="conf-meta">
+          <span>Data Science for the Public Good Symposium, UVA Biocomplexity Institute</span>
+          <span>Summer 2022</span>
+        </div>
+      </div>
+
+      <div class="conf-item">
+        <div class="conf-title">AEESP Conference &nbsp;·&nbsp; Attendee</div>
+        <div class="conf-meta">
+          <span>Association of Environmental Engineering and Science Professors</span>
+          <span>May 2025</span>
+        </div>
+      </div>
+
+      <div class="conf-item">
+        <div class="conf-title">NEWWA Spring Conference &nbsp;·&nbsp; Attendee</div>
+        <div class="conf-meta">
+          <span>New England Water Works Association</span>
+          <span>2024</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv">
+
+    <p style="font-family:var(--sans);font-size:14px;font-weight:300;color:var(--muted);margin-bottom:48px;">View or download my full CV: <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--water-mid);">Poonam Tajanpure — Curriculum Vitae</a></p>
+
+    <div class="sec-head">Fellowships &amp; awards</div>
+    <div class="cv-item"><span class="cv-item-name">Graduate Student Government Research &amp; Travel Grant, UMass Amherst</span><span class="cv-item-yr">Spring 2025</span></div>
+    <div class="cv-item"><span class="cv-item-name">Graduate School Travel Award, UMass Amherst</span><span class="cv-item-yr">Fall 2024</span></div>
+    <div class="cv-item"><span class="cv-item-name">Graduate Research Assistantship, UMass Amherst</span><span class="cv-item-yr">2022–Present</span></div>
+    <div class="cv-item"><span class="cv-item-name">Interdisciplinary Graduate Education Program in Infectious Disease, Virginia Tech</span><span class="cv-item-yr">2021–2022</span></div>
+    <div class="cv-item"><span class="cv-item-name">Junior Research Fellowship in Population Studies, University Grants Commission, India</span><span class="cv-item-yr">2017</span></div>
+    <div class="cv-item"><span class="cv-item-name">Government of India Fellowship, IIPS Mumbai</span><span class="cv-item-yr">2016–2017</span></div>
+    <div class="cv-item"><span class="cv-item-name">Government of India Research Grant for Master's Research, TISS</span><span class="cv-item-yr">2015–2016</span></div>
+
+    <div class="cv-section">
+      <div class="sec-head">Training &amp; certificates</div>
+      <div class="cv-item"><span class="cv-item-name">NASA ARSET: Remote Sensing for Climate-Sensitive Infectious Diseases</span><span class="cv-item-yr">Oct 2025</span></div>
+      <div class="cv-item"><span class="cv-item-name">United Nations Sustainable Solutions Winter School, UMass Amherst &amp; United Nations University</span><span class="cv-item-yr">Jan 2025</span></div>
+      <div class="cv-item"><span class="cv-item-name">NASA ARSET: Earth Observations for Assessing Waterborne Disease Risk</span><span class="cv-item-yr">Mar 2025</span></div>
+    </div>
+
+    <div class="cv-section">
+      <div class="sec-head">Teaching</div>
+      <div class="cv-item"><span class="cv-item-name">Teaching Assistant — Introduction to Engineering, Civil &amp; Environmental Engineering, UMass Amherst</span><span class="cv-item-yr">Fall 2022</span></div>
+    </div>
+
+    <div class="cv-section">
+      <div class="sec-head">Service</div>
+      <div class="cv-item">
+        <span class="cv-item-name">Founding Member &amp; EWRE Program Liaison, Civil and Environmental Engineering Graduate Students (CEEGS) Organization, UMass Amherst — helped establish the department's graduate student organization and represented the Environmental and Water Resources Engineering program</span>
+        <span class="cv-item-yr">2023–2024</span>
+      </div>
+    </div>
+
+    <div class="cv-section">
+      <div class="sec-head">Affiliations</div>
+      <div class="cv-item"><span class="cv-item-name">Association of Environmental Engineering and Science Professors (AEESP)</span><span class="cv-item-yr"></span></div>
+      <div class="cv-item"><span class="cv-item-name">New England Water Works Association (NEWWA)</span><span class="cv-item-yr"></span></div>
+    </div>
+
+  </section>
+
+</div>
+
+<footer>
+  <span>Poonam Tajanpure &nbsp;·&nbsp; UMass Amherst CEE</span>
+  <a href="/cdn-cgi/l/email-protection#562622373c37382623243316233b37252578333223"><span class="__cf_email__" data-cfemail="e292968388838c92979087a2978f839191cc878697">[email&#160;protected]</span></a>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function show(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('activ
