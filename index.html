@@ -568,76 +568,51 @@
 
         <!-- Study sites map -->
         <div style="margin-top:20px;">
-          <svg width="100%" viewBox="0 0 580 360" style="display:block;">
-            <!-- India outline — coordinates projected from real lat/lon
-                 Projection: x=(lon-68)/29*260+40, y=(37-lat)/29*320+20
-                 India approx bounding box: lat 8-37N, lon 68-97E -->
-            <path d="
-              M 148,20 L 168,18 L 192,19 L 212,22 L 232,26 L 248,32
-              L 258,40 L 264,52 L 267,64 L 269,78 L 266,90
-              L 260,98 L 255,108 L 248,116 L 242,126 L 238,138
-              L 234,152 L 228,168 L 220,184 L 212,198 L 202,214
-              L 190,228 L 178,242 L 166,254 L 155,266 L 146,278
-              L 138,292 L 130,305 L 124,315 L 120,322
-              L 113,312 L 107,298 L 100,284 L 94,268
-              L 88,252 L 84,236 L 80,220 L 78,204
-              L 76,188 L 75,172 L 74,156 L 74,140
-              L 76,124 L 79,108 L 85,93 L 93,78
-              L 103,64 L 114,50 L 126,38 L 136,28 Z
-            " fill="#e8f3ea" stroke="#b8d4c0" stroke-width="1.2"/>
-
-            <!-- Subtle lat/lon grid lines for context -->
-            <!-- 20N latitude line -->
-            <line x1="60" y1="166" x2="285" y2="166" stroke="#cce0d4" stroke-width="0.5" stroke-dasharray="3 6"/>
-            <!-- 75E longitude line -->
-            <line x1="110" y1="15" x2="110" y2="340" stroke="#cce0d4" stroke-width="0.5" stroke-dasharray="3 6"/>
-            <text x="62" y="163" font-family="DM Sans,sans-serif" font-size="9" fill="#aac0b0">20°N</text>
-            <text x="112" y="338" font-family="DM Sans,sans-serif" font-size="9" fill="#aac0b0">75°E</text>
-
-            <!-- CITIES — projected from real coordinates -->
-            <!-- Nashik: lat=20.0, lon=73.79 => x=93, y=166 -->
-            <circle cx="93" cy="166" r="6" fill="#2a8fc4" opacity="0.88"/>
-            <circle cx="93" cy="166" r="10" fill="none" stroke="#2a8fc4" stroke-width="1.2" opacity="0.3"/>
-
-            <!-- Mumbai: lat=19.07, lon=72.87 => x=85, y=176 -->
-            <circle cx="85" cy="176" r="6" fill="#2a8fc4" opacity="0.88"/>
-            <circle cx="85" cy="176" r="10" fill="none" stroke="#2a8fc4" stroke-width="1.2" opacity="0.3"/>
-
-            <!-- Solapur: lat=17.66, lon=75.91 => x=111, y=191 -->
-            <circle cx="111" cy="191" r="6" fill="#2a8fc4" opacity="0.88"/>
-            <circle cx="111" cy="191" r="10" fill="none" stroke="#2a8fc4" stroke-width="1.2" opacity="0.3"/>
-
-            <!-- Hubli-Dharwad: lat=15.37, lon=75.12 => x=103, y=216 -->
-            <circle cx="103" cy="216" r="9" fill="#1a5c8a" opacity="0.92"/>
-            <circle cx="103" cy="216" r="15" fill="none" stroke="#1a5c8a" stroke-width="1.5" opacity="0.35"/>
-
-            <!-- Leader lines to labels -->
-            <line x1="119" y1="216" x2="290" y2="232" stroke="#1a5c8a" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.55"/>
-            <line x1="117" y1="191" x2="290" y2="195" stroke="#2a8fc4" stroke-width="0.7" stroke-dasharray="3 4" opacity="0.45"/>
-            <line x1="91" y1="170" x2="290" y2="158" stroke="#2a8fc4" stroke-width="0.7" stroke-dasharray="3 4" opacity="0.45"/>
-            <line x1="88" y1="172" x2="290" y2="172" stroke="#2a8fc4" stroke-width="0.7" stroke-dasharray="3 4" opacity="0.45"/>
-
-            <!-- Labels -->
-            <text x="294" y="228" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1a5c8a">Hubli-Dharwad</text>
-            <text x="294" y="241" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a94">IWS &amp; child health · ~2,000 hh</text>
-
-            <text x="294" y="191" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1a5c8a">Solapur</text>
-            <text x="294" y="155" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1a5c8a">Nashik</text>
-            <text x="294" y="169" font-family="DM Sans,sans-serif" font-size="13" font-weight="600" fill="#1a5c8a">Mumbai</text>
-
-            <!-- Multi-city bracket -->
-            <line x1="488" y1="152" x2="496" y2="152" stroke="#5a7a94" stroke-width="0.8"/>
-            <line x1="496" y1="152" x2="496" y2="196" stroke="#5a7a94" stroke-width="0.8"/>
-            <line x1="488" y1="196" x2="496" y2="196" stroke="#5a7a94" stroke-width="0.8"/>
-            <text x="500" y="172" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a94">Multi-city</text>
-            <text x="500" y="184" font-family="DM Sans,sans-serif" font-size="10" fill="#5a7a94">~600 hh</text>
-
-            <!-- Legend -->
-            <circle cx="50" cy="320" r="8" fill="#1a5c8a" opacity="0.9"/>
-            <text x="64" y="324" font-family="DM Sans,sans-serif" font-size="11" fill="#333">Hubli-Dharwad — IWS &amp; child health (Nature Water, under review)</text>
-            <circle cx="50" cy="342" r="6" fill="#2a8fc4" opacity="0.85"/>
-            <text x="64" y="346" font-family="DM Sans,sans-serif" font-size="11" fill="#333">Mumbai, Nashik, Solapur — IWS reliability &amp; characterization survey</text>
-          </svg>
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5a7a94;margin-bottom:8px;">Study sites</div>
+          <div id="study-map" style="height:300px;border-radius:6px;border:1px solid #d6e6f2;overflow:hidden;"></div>
+          <div style="display:flex;gap:20px;margin-top:10px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;">
+              <span style="width:12px;height:12px;border-radius:50%;background:#1a5c8a;display:inline-block;flex-shrink:0;"></span>
+              Hubli-Dharwad — IWS &amp; child health (Nature Water, under review)
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;">
+              <span style="width:10px;height:10px;border-radius:50%;background:#2a8fc4;display:inline-block;flex-shrink:0;"></span>
+              Mumbai, Nashik, Solapur — IWS reliability &amp; characterization survey
+            </div>
+          </div>
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+          <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+          <script>
+            (function() {
+              function initMap() {
+                if (!document.getElementById('study-map') || typeof L === 'undefined') {
+                  setTimeout(initMap, 200); return;
+                }
+                var map = L.map('study-map', { zoomControl: true, scrollWheelZoom: false }).setView([17.5, 74.5], 6);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  attribution: '&copy; OpenStreetMap contributors',
+                  maxZoom: 10
+                }).addTo(map);
+                function makeIcon(color, size) {
+                  return L.divIcon({
+                    className: '',
+                    html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3);"></div>',
+                    iconSize: [size, size],
+                    iconAnchor: [size/2, size/2]
+                  });
+                }
+                L.marker([15.37, 75.12], {icon: makeIcon('#1a5c8a', 16)})
+                  .addTo(map).bindPopup('<b>Hubli-Dharwad</b><br>IWS unpredictability &amp; child health<br>~2,000 households, 4 survey rounds');
+                L.marker([19.07, 72.87], {icon: makeIcon('#2a8fc4', 13)})
+                  .addTo(map).bindPopup('<b>Mumbai</b><br>IWS reliability &amp; characterization survey');
+                L.marker([20.00, 73.79], {icon: makeIcon('#2a8fc4', 13)})
+                  .addTo(map).bindPopup('<b>Nashik</b><br>IWS reliability &amp; characterization survey');
+                L.marker([17.66, 75.91], {icon: makeIcon('#2a8fc4', 13)})
+                  .addTo(map).bindPopup('<b>Solapur</b><br>IWS reliability &amp; characterization survey');
+              }
+              initMap();
+            })();
+          </script>
         </div>
       </div>
 
