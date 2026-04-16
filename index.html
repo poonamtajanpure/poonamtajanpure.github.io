@@ -402,7 +402,7 @@
   <!-- LEFT SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-name">Poonam Tajanpure</div>
-    <div class="sidebar-role">Ph.D. Candidate<br>Environmental &amp; Water Resources Engineering<br>Dept. of Civil &amp; Environmental Engineering<br>UMass Amherst</div>
+    <div class="sidebar-role">Ph.D. Candidate<br>Environmental &amp; Water Resources Engineering<br><a href="https://www.umass.edu/engineering/cee" target="_blank" style="color:#5a7a94;">Dept. of Civil &amp; Environmental Engineering</a><br>UMass Amherst</div>
 
     <nav>
       <a href="#about" class="nav-about">About</a>
@@ -433,7 +433,7 @@
         <div class="profile-text">
           <h1>Poonam Tajanpure</h1>
           <div class="role">Ph.D. Candidate &nbsp;·&nbsp; Environmental and Water Resources Engineering</div>
-          <div class="role" style="margin-top:2px">Department of Civil and Environmental Engineering &nbsp;·&nbsp; University of Massachusetts Amherst</div>
+          <div class="role" style="margin-top:2px"><a href="https://www.umass.edu/engineering/cee" target="_blank" style="color:#666;">Department of Civil and Environmental Engineering</a> &nbsp;·&nbsp; University of Massachusetts Amherst</div>
 
           <p>I am a Ph.D. candidate working with <a href="https://watersystemslab.github.io/watersystemslab/" target="_blank">Prof. Emily Kumpel</a> on questions at the intersection of water infrastructure, public health, and equity.</p>
 
@@ -517,7 +517,9 @@
               <!-- Study sites map -->
         <div style="margin-top:20px;">
           <div style="font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5a7a94;margin-bottom:8px;">Study sites</div>
-          <div id="study-map" style="height:300px;border-radius:6px;border:1px solid #d6e6f2;overflow:hidden;"></div>
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+          <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+          <div id="study-map" style="height:320px;border-radius:6px;border:1px solid #d6e6f2;overflow:hidden;background:#e8f0f5;"></div>
           <div style="display:flex;gap:20px;margin-top:10px;flex-wrap:wrap;">
             <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;">
               <span style="width:12px;height:12px;border-radius:50%;background:#1a5c8a;display:inline-block;flex-shrink:0;"></span>
@@ -528,38 +530,43 @@
               Mumbai, Nashik, Solapur — IWS reliability &amp; characterization survey
             </div>
           </div>
-          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-          <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
           <script>
-            (function() {
-              function initMap() {
-                if (!document.getElementById('study-map') || typeof L === 'undefined') {
-                  setTimeout(initMap, 200); return;
-                }
-                var map = L.map('study-map', { zoomControl: true, scrollWheelZoom: false }).setView([17.5, 74.5], 6);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                  attribution: '&copy; OpenStreetMap contributors',
-                  maxZoom: 10
-                }).addTo(map);
-                function makeIcon(color, size) {
-                  return L.divIcon({
-                    className: '',
-                    html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3);"></div>',
-                    iconSize: [size, size],
-                    iconAnchor: [size/2, size/2]
-                  });
-                }
-                L.marker([15.37, 75.12], {icon: makeIcon('#1a5c8a', 16)})
-                  .addTo(map).bindPopup('<b>Hubli-Dharwad</b><br>IWS unpredictability &amp; child health<br>~2,000 households, 4 survey rounds');
-                L.marker([19.07, 72.87], {icon: makeIcon('#2a8fc4', 13)})
-                  .addTo(map).bindPopup('<b>Mumbai</b><br>IWS reliability &amp; characterization survey');
-                L.marker([20.00, 73.79], {icon: makeIcon('#2a8fc4', 13)})
-                  .addTo(map).bindPopup('<b>Nashik</b><br>IWS reliability &amp; characterization survey');
-                L.marker([17.66, 75.91], {icon: makeIcon('#2a8fc4', 13)})
-                  .addTo(map).bindPopup('<b>Solapur</b><br>IWS reliability &amp; characterization survey');
+            window.addEventListener('load', function() {
+              if (typeof L === 'undefined') return;
+              var cities = [
+                [15.37, 75.12],
+                [19.07, 72.87],
+                [20.00, 73.79],
+                [17.66, 75.91]
+              ];
+              var map = L.map('study-map', {
+                zoomControl: true,
+                scrollWheelZoom: false,
+                attributionControl: true
+              });
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+              }).addTo(map);
+              function makeIcon(color, size) {
+                return L.divIcon({
+                  className: '',
+                  html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:2.5px solid white;box-shadow:0 1px 5px rgba(0,0,0,0.35);"></div>',
+                  iconSize: [size, size],
+                  iconAnchor: [size/2, size/2]
+                });
               }
-              initMap();
-            })();
+              L.marker([15.37, 75.12], {icon: makeIcon('#1a5c8a', 18)})
+                .addTo(map).bindPopup('<b>Hubli-Dharwad</b><br>IWS unpredictability &amp; child health<br>~2,000 households · 4 survey rounds');
+              L.marker([19.07, 72.87], {icon: makeIcon('#2a8fc4', 14)})
+                .addTo(map).bindPopup('<b>Mumbai</b><br>IWS reliability &amp; characterization survey');
+              L.marker([20.00, 73.79], {icon: makeIcon('#2a8fc4', 14)})
+                .addTo(map).bindPopup('<b>Nashik</b><br>IWS reliability &amp; characterization survey');
+              L.marker([17.66, 75.91], {icon: makeIcon('#2a8fc4', 14)})
+                .addTo(map).bindPopup('<b>Solapur</b><br>IWS reliability &amp; characterization survey');
+              var bounds = L.latLngBounds(cities).pad(0.25);
+              map.fitBounds(bounds);
+              setTimeout(function() { map.invalidateSize(); }, 300);
+            });
           </script>
         </div>
 
