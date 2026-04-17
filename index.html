@@ -7,8 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
@@ -23,7 +24,6 @@
     a { color: #1a5c8a; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── LAYOUT: sidebar + content ── */
     .layout {
       display: flex;
       min-height: 100vh;
@@ -31,7 +31,7 @@
       margin: 0 auto;
     }
 
-    /* ── LEFT SIDEBAR ── */
+    /* Sidebar */
     .sidebar {
       width: 220px;
       flex-shrink: 0;
@@ -56,9 +56,11 @@
     .sidebar-role {
       font-size: 12px;
       color: #888;
-      line-height: 1.5;
+      line-height: 1.6;
       margin-bottom: 36px;
     }
+
+    .sidebar-role a { color: #5a7a94; font-size: 12px; }
 
     .sidebar nav {
       display: flex;
@@ -88,19 +90,19 @@
       margin-top: auto;
       font-size: 12px;
       color: #aaa;
-      line-height: 1.6;
+      line-height: 1.8;
     }
 
     .sidebar-footer a { color: #1a5c8a; font-size: 12px; }
 
-    /* ── MAIN CONTENT ── */
+    /* Content */
     .content {
       flex: 1;
       padding: 48px 52px 80px;
       min-width: 0;
     }
 
-    /* ── PAGES via :target ── */
+    /* Pages via :target */
     .page { display: none; }
     #about { display: block; }
 
@@ -113,14 +115,13 @@
     #publications:target,
     #cv:target { display: block; }
 
-    /* highlight active nav link via :target */
     #about:target ~ * .nav-about,
     body:not(:has(:target)) .nav-about { color: #1a5c8a; background: #e8f3fb; border-left-color: #1a5c8a; }
     #research:target ~ * .nav-research { color: #1a5c8a; background: #e8f3fb; border-left-color: #1a5c8a; }
     #publications:target ~ * .nav-publications { color: #1a5c8a; background: #e8f3fb; border-left-color: #1a5c8a; }
     #cv:target ~ * .nav-cv { color: #1a5c8a; background: #e8f3fb; border-left-color: #1a5c8a; }
 
-    /* ── ABOUT ── */
+    /* About */
     .profile {
       display: flex;
       gap: 28px;
@@ -139,22 +140,6 @@
       flex-shrink: 0;
     }
 
-    .profile-initials {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: #deeef8;
-      border: 2px solid #a8cde0;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Source Serif 4', serif;
-      font-size: 42px;
-      font-style: italic;
-      color: #1a5c8a;
-    }
-
     .profile-text h1 {
       font-family: 'Source Serif 4', serif;
       font-size: 28px;
@@ -167,7 +152,7 @@
     .profile-text .role {
       font-size: 13px;
       color: #666;
-      margin-bottom: 14px;
+      margin-bottom: 6px;
     }
 
     .profile-text p {
@@ -199,7 +184,7 @@
       background: #f0f7fd;
     }
 
-    /* Education toggle */
+    /* Education */
     .edu-toggle {
       width: 100%;
       background: none;
@@ -221,7 +206,6 @@
 
     .edu-toggle .arrow { font-size: 10px; transition: transform 0.2s; }
     .edu-toggle.open .arrow { transform: rotate(180deg); }
-
     .edu-list { display: none; border-bottom: 1px solid #dde8f0; }
     .edu-list.open { display: block; }
 
@@ -246,7 +230,7 @@
     .edu-inst { font-size: 12px; color: #777; line-height: 1.5; }
     .edu-yr { font-size: 12px; color: #999; white-space: nowrap; flex-shrink: 0; }
 
-    /* ── SHARED ── */
+    /* Shared */
     h2 {
       font-family: 'Source Serif 4', serif;
       font-size: 24px;
@@ -274,7 +258,7 @@
       border-bottom: 1px solid #dde8f0;
     }
 
-    /* ── RESEARCH ── */
+    /* Research */
     .res-card { padding: 20px 0; border-bottom: 1px solid #dde8f0; }
     .res-card:first-of-type { border-top: 1px solid #dde8f0; }
 
@@ -284,7 +268,7 @@
       letter-spacing: 0.07em;
       text-transform: uppercase;
       color: #1a8ac4;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
     .res-card h3 {
@@ -298,26 +282,11 @@
 
     .res-card p { font-size: 13px; color: #444; line-height: 1.8; }
 
-    .skills { width: 100%; border-collapse: collapse; margin-top: 4px; }
-    .skills tr { border-bottom: 1px solid #dde8f0; }
-    .skills tr:first-child { border-top: 1px solid #dde8f0; }
-    .skills td { padding: 11px 0; vertical-align: top; font-size: 13px; }
-    .skills td:first-child {
-      width: 150px;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #777;
-      padding-right: 16px;
-    }
-
-    /* ── PUBLICATIONS ── */
+    /* Publications */
     .pub { padding: 20px 0; border-bottom: 1px solid #dde8f0; }
     .pub:first-of-type { border-top: 1px solid #dde8f0; }
-    .pub-num { font-size: 11px; color: #999; margin-bottom: 5px; }
     .pub-title { font-family: 'Source Serif 4', serif; font-size: 16px; font-style: italic; color: #1a1a1a; line-height: 1.5; margin-bottom: 5px; }
-    .pub-authors { font-size: 13px; color: #666; margin-bottom: 7px; }
+    .pub-authors { font-size: 13px; color: #666; margin-bottom: 8px; }
     .badge { display: inline-block; font-size: 11px; padding: 2px 9px; border-radius: 3px; margin-right: 6px; }
     .badge-sub { background: #dff0da; color: #2d6a2d; }
     .badge-wip { background: #ddeef8; color: #1a5c8a; }
@@ -329,7 +298,13 @@
     .conf-meta { font-size: 12px; color: #777; }
     .badge-oral { display: inline-block; font-size: 10px; font-weight: 500; text-transform: uppercase; padding: 1px 7px; border-radius: 3px; background: #e8f3fb; color: #1a5c8a; margin-left: 6px; }
 
-    /* ── CV ── */
+    /* Stat cards */
+    .stat-cards { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .stat-card { flex: 1; min-width: 130px; border-radius: 6px; padding: 14px 16px; text-align: center; }
+    .stat-card .stat-num { font-size: 26px; font-weight: 700; line-height: 1.1; }
+    .stat-card .stat-label { font-size: 11px; margin-top: 4px; line-height: 1.5; }
+
+    /* CV */
     .cv-box {
       padding: 28px 32px;
       border: 1px solid #a8cde0;
@@ -340,7 +315,7 @@
     .cv-box p { font-size: 14px; color: #333; margin-bottom: 10px; }
     .cv-box a { font-size: 15px; font-weight: 500; color: #1a5c8a; }
 
-    /* ── MOBILE: top nav ── */
+    /* Mobile nav */
     .mobile-nav {
       display: none;
       background: #fff;
@@ -356,11 +331,7 @@
       margin-bottom: 10px;
     }
 
-    .mobile-nav-links {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
+    .mobile-nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
 
     .mobile-nav-links a {
       font-size: 13px;
@@ -381,12 +352,10 @@
       .profile { flex-direction: column; align-items: center; text-align: center; }
       .tags { justify-content: center; }
     }
-
   </style>
 </head>
 <body>
 
-<!-- Mobile top nav (shown only on small screens) -->
 <div class="mobile-nav">
   <div class="site-name">Poonam Tajanpure</div>
   <div class="mobile-nav-links">
@@ -399,10 +368,14 @@
 
 <div class="layout">
 
-  <!-- LEFT SIDEBAR -->
   <div class="sidebar">
     <div class="sidebar-name">Poonam Tajanpure</div>
-    <div class="sidebar-role">Ph.D. Candidate<br>Environmental &amp; Water Resources Engineering<br><a href="https://www.umass.edu/engineering/civil-and-environmental-engineering" target="_blank" style="color:#5a7a94;">Dept. of Civil &amp; Environmental Engineering</a><br>UMass Amherst</div>
+    <div class="sidebar-role">
+      Ph.D. Candidate<br>
+      Environmental &amp; Water Resources Engineering<br>
+      <a href="https://www.umass.edu/engineering/civil-and-environmental-engineering" target="_blank">Dept. of Civil &amp; Environmental Engineering</a><br>
+      UMass Amherst
+    </div>
 
     <nav>
       <a href="#about" class="nav-about">About</a>
@@ -413,27 +386,23 @@
 
     <div class="sidebar-footer">
       <a href="mailto:ptajanpure@umass.edu">ptajanpure@umass.edu</a><br>
-      <a href="https://www.linkedin.com/in/poonam-tajanpure-72a64523b/" target="_blank">LinkedIn</a><br>
-      <!-- <a href="https://scholar.google.com/..." target="_blank">Google Scholar</a> -->
+      <a href="https://www.linkedin.com/in/poonam-tajanpure-72a64523b/" target="_blank">LinkedIn</a>
+      <!-- <br><a href="https://scholar.google.com/..." target="_blank">Google Scholar</a> -->
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
   <div class="content">
 
+    <!-- ABOUT -->
     <div id="about" class="page">
 
       <div class="profile">
-        <!--
-          PHOTO: upload photo.jpg to same GitHub folder as index.html,
-          then delete the profile-initials div and uncomment the img tag below.
-        -->
         <img src="photo.jpg" alt="Poonam Tajanpure">
 
         <div class="profile-text">
           <h1>Poonam Tajanpure</h1>
           <div class="role">Ph.D. Candidate &nbsp;·&nbsp; Environmental and Water Resources Engineering</div>
-          <div class="role" style="margin-top:2px"><a href="https://www.umass.edu/engineering/civil-and-environmental-engineering" target="_blank" style="color:#666;">Department of Civil and Environmental Engineering</a> &nbsp;·&nbsp; University of Massachusetts Amherst</div>
+          <div class="role"><a href="https://www.umass.edu/engineering/civil-and-environmental-engineering" target="_blank" style="color:#666;">Department of Civil and Environmental Engineering</a> &nbsp;·&nbsp; University of Massachusetts Amherst</div>
 
           <p>I am a Ph.D. candidate in Environmental and Water Resources Engineering working with <a href="https://watersystemslab.github.io/watersystemslab/" target="_blank">Prof. Emily Kumpel</a>. My research spans drinking water quality and access, environmental determinants of public health, and the application of machine learning to water infrastructure, across both the United States and South Asia.</p>
 
@@ -502,9 +471,9 @@
         </div>
 
       </div>
-
     </div>
 
+    <!-- RESEARCH -->
     <div id="research" class="page">
       <h2>Research</h2>
       <p class="section-intro">My research addresses drinking water quality, reliability, and equity across the United States and South Asia. I combine field-based household surveys, large-scale data collection, and computational methods, including machine learning and spatial analysis, to understand how water infrastructure shapes public health and community well-being.</p>
@@ -513,44 +482,20 @@
         <div class="res-label">Intermittent water supply</div>
         <p style="font-size:13px;color:#444;line-height:1.8;margin-bottom:12px"><strong>IWS unpredictability and health outcomes (Hubli-Dharwad):</strong> Using longitudinal data from nearly 2,000 households, this study examined how water delivery unpredictability is associated with waterborne disease. Households where water arrived on a different day than expected had 47% higher odds of reported illness compared to those with a predictable supply. This paper is currently under review at <em>Nature Water</em> (preprint available on ResearchSquare).</p>
         <p style="font-size:13px;color:#444;line-height:1.8;margin-bottom:16px"><strong>IWS reliability and characterization (multi-city survey, ongoing):</strong> I designed and led field data collection across Mumbai, Nashik, and Solapur, administering approximately 600 household surveys on supply schedules, predictability, and coping strategies across diverse urban contexts in India.</p>
-        <div style="margin-top:4px;">
+
+        <div style="margin-top:8px;">
           <div style="font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5a7a94;margin-bottom:8px;">Field sites</div>
-          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-          <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
           <div id="study-map" style="height:300px;border-radius:6px;border:1px solid #d6e6f2;overflow:hidden;background:#e8f0f5;"></div>
           <div style="display:flex;gap:20px;margin-top:10px;flex-wrap:wrap;">
             <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;">
               <span style="width:12px;height:12px;border-radius:50%;background:#1a5c8a;display:inline-block;flex-shrink:0;"></span>
-              Hubli-Dharwad — IWS &amp; health outcomes (Nature Water, under review)
+              Hubli-Dharwad &mdash; IWS &amp; health outcomes (Nature Water, under review)
             </div>
             <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;">
               <span style="width:10px;height:10px;border-radius:50%;background:#2a8fc4;display:inline-block;flex-shrink:0;"></span>
-              Mumbai, Nashik, Solapur — IWS reliability &amp; characterization survey
+              Mumbai, Nashik, Solapur &mdash; IWS reliability &amp; characterization survey
             </div>
           </div>
-          <script>
-            window.addEventListener('load', function() {
-              if (typeof L === 'undefined') return;
-              var cities = [[15.37,75.12],[19.07,72.87],[20.00,73.79],[17.66,75.91]];
-              var map = L.map('study-map', { zoomControl: true, scrollWheelZoom: false });
-              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-              }).addTo(map);
-              function makeIcon(color, size) {
-                return L.divIcon({
-                  className: '',
-                  html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:2.5px solid white;box-shadow:0 1px 5px rgba(0,0,0,0.35);"></div>',
-                  iconSize: [size, size], iconAnchor: [size/2, size/2]
-                });
-              }
-              L.marker([15.37,75.12],{icon:makeIcon('#1a5c8a',18)}).addTo(map).bindPopup('<b>Hubli-Dharwad</b><br>IWS unpredictability &amp; health outcomes<br>~2,000 households · 4 survey rounds');
-              L.marker([19.07,72.87],{icon:makeIcon('#2a8fc4',14)}).addTo(map).bindPopup('<b>Mumbai</b><br>IWS reliability &amp; characterization survey');
-              L.marker([20.00,73.79],{icon:makeIcon('#2a8fc4',14)}).addTo(map).bindPopup('<b>Nashik</b><br>IWS reliability &amp; characterization survey');
-              L.marker([17.66,75.91],{icon:makeIcon('#2a8fc4',14)}).addTo(map).bindPopup('<b>Solapur</b><br>IWS reliability &amp; characterization survey');
-              map.fitBounds(L.latLngBounds(cities).pad(0.25));
-              setTimeout(function(){ map.invalidateSize(); }, 300);
-            });
-          </script>
         </div>
       </div>
 
@@ -567,6 +512,7 @@
       </div>
     </div>
 
+    <!-- PUBLICATIONS -->
     <div id="publications" class="page">
       <h2>Publications</h2>
 
@@ -575,29 +521,26 @@
       <div class="pub">
         <div class="pub-title">Unpredictability of intermittent water supply and effects on child health in Hubli-Dharwad, India</div>
         <div class="pub-authors">Tajanpure, P., Kumpel, E., &amp; Ercumen, A.</div>
-        <div style="margin-bottom:8px">
-          <span class="badge badge-sub">Revised &amp; resubmitted — Nature Water</span>
-          <a href="https://www.researchsquare.com/article/rs-7519884/v1" target="_blank" style="font-size:12px;margin-left:6px">Preprint: ResearchSquare (2025) &rarr;</a>
+        <div style="margin-bottom:10px;">
+          <span class="badge badge-sub">Revised &amp; resubmitted &mdash; Nature Water</span>
+          <a href="https://www.researchsquare.com/article/rs-7519884/v1" target="_blank" style="font-size:12px;margin-left:6px;">Preprint: ResearchSquare (2025) &rarr;</a>
         </div>
-        <p style="font-size:13px;color:#444;line-height:1.75;margin-top:8px">In many cities across South Asia, piped water arrives not continuously but on an unpredictable schedule, sometimes hours late, sometimes days. Using longitudinal survey data from nearly 2,000 households in Hubli-Dharwad, India, this study found that children in households where water arrived on a different day than expected had 47% higher odds of diarrhea compared to households with a predictable supply schedule. Effects were strongest among households receiving water infrequently. These findings suggest that improving schedule reliability, even within existing intermittent systems, could be a low-cost, immediate pathway to reducing waterborne disease in cities where full upgrades to continuous supply are decades away.</p>
+        <p style="font-size:13px;color:#444;line-height:1.8;margin-bottom:16px;">In many cities across South Asia, piped water arrives not continuously but on an unpredictable schedule, sometimes hours late, sometimes days. Using longitudinal survey data from nearly 2,000 households in Hubli-Dharwad, India, this study found that households where water arrived on a different day than expected had 47% higher odds of reported illness compared to those with a predictable supply schedule. Effects were strongest among households receiving water infrequently. These findings suggest that improving schedule reliability within existing intermittent systems could be a practical and immediate pathway to reducing waterborne disease in cities where full upgrades to continuous supply are not yet feasible.</p>
 
-        <!-- Key finding callout -->
-        <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
-          <div style="flex:1;min-width:140px;background:#dff0da;border-radius:6px;padding:16px 18px;text-align:center;">
-            <div style="font-size:28px;font-weight:700;color:#1a5c3a;line-height:1.1;">47%</div>
-            <div style="font-size:12px;color:#2d6a2d;margin-top:4px;line-height:1.5;">higher odds of diarrhea when water arrived on a different day than expected</div>
+        <div class="stat-cards">
+          <div class="stat-card" style="background:#dff0da;">
+            <div class="stat-num" style="color:#1a5c3a;">47%</div>
+            <div class="stat-label" style="color:#2d6a2d;">higher odds of illness when water arrived on a different day than expected</div>
           </div>
-          <div style="flex:1;min-width:140px;background:#ddeef8;border-radius:6px;padding:16px 18px;text-align:center;">
-            <div style="font-size:28px;font-weight:700;color:#0c447c;line-height:1.1;">~2,000</div>
-            <div style="font-size:12px;color:#1a5c8a;margin-top:4px;line-height:1.5;">households surveyed longitudinally in Hubli-Dharwad, India</div>
+          <div class="stat-card" style="background:#ddeef8;">
+            <div class="stat-num" style="color:#0c447c;">~2,000</div>
+            <div class="stat-label" style="color:#1a5c8a;">households surveyed longitudinally in Hubli-Dharwad, India</div>
           </div>
-          <div style="flex:1;min-width:140px;background:#f0f7fd;border-radius:6px;padding:16px 18px;text-align:center;">
-            <div style="font-size:28px;font-weight:700;color:#1a5c8a;line-height:1.1;">4 rounds</div>
-            <div style="font-size:12px;color:#3a6a8a;margin-top:4px;line-height:1.5;">of data collection over 1.5 years, across seasons</div>
+          <div class="stat-card" style="background:#f0f7fd;">
+            <div class="stat-num" style="color:#1a5c8a;">4 rounds</div>
+            <div class="stat-label" style="color:#3a6a8a;">of data collection over 1.5 years, spanning multiple seasons</div>
           </div>
         </div>
-
-
       </div>
 
       <div class="pub">
@@ -618,14 +561,14 @@
         <div class="pub-title">Using remote sensed data for social and economic decision making in Zimbabwe</div>
         <div class="pub-authors">Abedine, N., Alwang, J., Chen, S., Fan, F., Liverpool, A., Navarette, J., Posadas, B., Quaye, L., &amp; Tajanpure, P.</div>
         <span class="pub-venue">University of Virginia Biocomplexity Institute, 2022</span>
-        <a href="https://aaec-vt.shinyapps.io/dspg22Zimbabwe/" target="_blank" style="font-size:12px;margin-left:8px">View project &rarr;</a>
+        <a href="https://aaec-vt.shinyapps.io/dspg22Zimbabwe/" target="_blank" style="font-size:12px;margin-left:8px;">View project &rarr;</a>
       </div>
 
       <div class="pub">
         <div class="pub-title">Sensing drought in the Sahel for household resilience</div>
         <div class="pub-authors">Back, C., Benami, E., Chen, S., Gupta, M., Poghosyam, A., Rudd, R., &amp; Tajanpure, P.</div>
         <span class="pub-venue">University of Virginia Biocomplexity Institute, 2022</span>
-        <a href="https://aaec-vt.shinyapps.io/dspg2022Sahel/" target="_blank" style="font-size:12px;margin-left:8px">View project &rarr;</a>
+        <a href="https://aaec-vt.shinyapps.io/dspg2022Sahel/" target="_blank" style="font-size:12px;margin-left:8px;">View project &rarr;</a>
       </div>
 
       <div class="sub-head">Presentations</div>
@@ -637,12 +580,13 @@
 
     </div>
 
+    <!-- CV -->
     <div id="cv" class="page">
       <h2>CV</h2>
-      <div class="cv-box" style="margin-top:20px">
-        <p>You can view and download my full CV here:</p>
-        <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank">Poonam Tajanpure — Curriculum Vitae (PDF) &rarr;</a>
-        <p style="margin-top:12px;font-size:12px;color:#888">For questions or collaborations, reach out by email.</p>
+      <div class="cv-box" style="margin-top:20px;">
+        <p>My full CV includes details on research experience, fellowships and awards, training, teaching, and service.</p>
+        <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank">Poonam Tajanpure &mdash; Curriculum Vitae (PDF) &rarr;</a>
+        <p style="margin-top:12px;font-size:12px;color:#888;">For questions or potential collaborations, please reach out by email.</p>
       </div>
     </div>
 
@@ -660,6 +604,32 @@ function toggleEdu(btn) {
     btn.classList.add('open');
   }
 }
+
+window.addEventListener('load', function() {
+  if (typeof L === 'undefined') return;
+  var cities = [[15.37,75.12],[19.07,72.87],[20.00,73.79],[17.66,75.91]];
+  var map = L.map('study-map', { zoomControl: true, scrollWheelZoom: false });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+  function makeIcon(color, size) {
+    return L.divIcon({
+      className: '',
+      html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:2.5px solid white;box-shadow:0 1px 5px rgba(0,0,0,0.3);"></div>',
+      iconSize: [size,size], iconAnchor: [size/2,size/2]
+    });
+  }
+  L.marker([15.37,75.12],{icon:makeIcon('#1a5c8a',18)}).addTo(map)
+    .bindPopup('<b>Hubli-Dharwad</b><br>IWS unpredictability &amp; health outcomes<br>~2,000 households &middot; 4 survey rounds');
+  L.marker([19.07,72.87],{icon:makeIcon('#2a8fc4',14)}).addTo(map)
+    .bindPopup('<b>Mumbai</b><br>IWS reliability &amp; characterization survey');
+  L.marker([20.00,73.79],{icon:makeIcon('#2a8fc4',14)}).addTo(map)
+    .bindPopup('<b>Nashik</b><br>IWS reliability &amp; characterization survey');
+  L.marker([17.66,75.91],{icon:makeIcon('#2a8fc4',14)}).addTo(map)
+    .bindPopup('<b>Solapur</b><br>IWS reliability &amp; characterization survey');
+  map.fitBounds(L.latLngBounds(cities).pad(0.25));
+  setTimeout(function(){ map.invalidateSize(); }, 400);
+});
 </script>
 
 </body>
