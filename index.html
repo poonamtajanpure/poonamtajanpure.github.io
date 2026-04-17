@@ -435,11 +435,11 @@
           <div class="role">Ph.D. Candidate &nbsp;·&nbsp; Environmental and Water Resources Engineering</div>
           <div class="role" style="margin-top:2px"><a href="https://www.umass.edu/engineering/civil-and-environmental-engineering" target="_blank" style="color:#666;">Department of Civil and Environmental Engineering</a> &nbsp;·&nbsp; University of Massachusetts Amherst</div>
 
-          <p>I am a Ph.D. candidate in Environmental and Water Resources Engineering working with <a href="https://watersystemslab.github.io/watersystemslab/" target="_blank">Prof. Emily Kumpel</a>. My research spans drinking water quality and access, environmental determinants of public health, and the application of machine learning to water infrastructure — across both the United States and South Asia.</p>
+          <p>I am a Ph.D. candidate in Environmental and Water Resources Engineering working with <a href="https://watersystemslab.github.io/watersystemslab/" target="_blank">Prof. Emily Kumpel</a>. My research spans drinking water quality and access, environmental determinants of public health, and the application of machine learning to water infrastructure, across both the United States and South Asia.</p>
 
-          <p>My dissertation — <em>From Household to Infrastructure: Empirical and Computational Approaches to Drinking Water Equity</em> — brings together field-based household surveys in Indian cities and computational methods to understand how water systems shape public health and daily life. In the US, I work with the Massachusetts Department of Environmental Protection on lead in schools and lead service line identification.</p>
+          <p>My dissertation, <em>From Household to Infrastructure: Empirical and Computational Approaches to Drinking Water Equity</em>, brings together field-based household surveys in Indian cities and computational methods to understand how water systems shape public health and daily life. In the US, I work with the Massachusetts Department of Environmental Protection on lead in schools and lead service line identification.</p>
 
-          <p>Before UMass, I trained in population studies and development studies in Mumbai, and in agricultural engineering in Rahuri — a background that shapes how I approach water as a question of access, equity, and lived experience, not just infrastructure.</p>
+          <p>Before UMass, I trained in population studies, development studies, and agricultural engineering in India. This interdisciplinary background shapes how I approach water as a question of access, equity, and lived experience, not just infrastructure.</p>
 
           <div class="tags">
             <span class="tag">Spatial Analysis &amp; Machine Learning</span>
@@ -507,24 +507,21 @@
 
     <div id="research" class="page">
       <h2>Research</h2>
-      <p class="section-intro">I study how water infrastructure shapes health and daily life — particularly in cities where piped water arrives intermittently and unpredictably. My work combines household surveys, field data collection, and computational methods including machine learning and spatial analysis.</p>
+      <p class="section-intro">My research addresses drinking water quality, reliability, and equity across the United States and South Asia. I combine field-based household surveys, large-scale data collection, and computational methods, including machine learning and spatial analysis, to understand how water infrastructure shapes public health and community well-being.</p>
 
       <div class="res-card">
         <div class="res-label">Intermittent water supply</div>
-        <p style="font-size:13px;color:#444;line-height:1.8;margin-bottom:10px"><strong>IWS unpredictability and child health (Hubli-Dharwad):</strong> Using longitudinal data from nearly 2,000 households, this study examined how water delivery unpredictability affects diarrhea in children under five. Children in households where water arrived on a different day than expected had 47% higher odds of diarrhea. This paper is currently under review at <em>Nature Water</em> (preprint available on ResearchSquare).</p>
-        <p style="font-size:13px;color:#444;line-height:1.8"><strong>IWS reliability and characterization (multi-city survey, ongoing):</strong> I designed and led field data collection across Mumbai, Nashik, and Solapur, administering approximately 600 household surveys on supply schedules, predictability, and coping strategies across diverse urban contexts in India.</p>
-      </div>
-
-              <!-- Study sites map -->
-        <div style="margin-top:20px;">
-          <div style="font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5a7a94;margin-bottom:8px;">Study sites</div>
+        <p style="font-size:13px;color:#444;line-height:1.8;margin-bottom:12px"><strong>IWS unpredictability and health outcomes (Hubli-Dharwad):</strong> Using longitudinal data from nearly 2,000 households, this study examined how water delivery unpredictability is associated with waterborne disease. Households where water arrived on a different day than expected had 47% higher odds of reported illness compared to those with a predictable supply. This paper is currently under review at <em>Nature Water</em> (preprint available on ResearchSquare).</p>
+        <p style="font-size:13px;color:#444;line-height:1.8;margin-bottom:16px"><strong>IWS reliability and characterization (multi-city survey, ongoing):</strong> I designed and led field data collection across Mumbai, Nashik, and Solapur, administering approximately 600 household surveys on supply schedules, predictability, and coping strategies across diverse urban contexts in India.</p>
+        <div style="margin-top:4px;">
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5a7a94;margin-bottom:8px;">Field sites</div>
           <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
           <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-          <div id="study-map" style="height:320px;border-radius:6px;border:1px solid #d6e6f2;overflow:hidden;background:#e8f0f5;"></div>
+          <div id="study-map" style="height:300px;border-radius:6px;border:1px solid #d6e6f2;overflow:hidden;background:#e8f0f5;"></div>
           <div style="display:flex;gap:20px;margin-top:10px;flex-wrap:wrap;">
             <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;">
               <span style="width:12px;height:12px;border-radius:50%;background:#1a5c8a;display:inline-block;flex-shrink:0;"></span>
-              Hubli-Dharwad — IWS &amp; child health (Nature Water, under review)
+              Hubli-Dharwad — IWS &amp; health outcomes (Nature Water, under review)
             </div>
             <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#444;">
               <span style="width:10px;height:10px;border-radius:50%;background:#2a8fc4;display:inline-block;flex-shrink:0;"></span>
@@ -534,17 +531,8 @@
           <script>
             window.addEventListener('load', function() {
               if (typeof L === 'undefined') return;
-              var cities = [
-                [15.37, 75.12],
-                [19.07, 72.87],
-                [20.00, 73.79],
-                [17.66, 75.91]
-              ];
-              var map = L.map('study-map', {
-                zoomControl: true,
-                scrollWheelZoom: false,
-                attributionControl: true
-              });
+              var cities = [[15.37,75.12],[19.07,72.87],[20.00,73.79],[17.66,75.91]];
+              var map = L.map('study-map', { zoomControl: true, scrollWheelZoom: false });
               L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; OpenStreetMap contributors'
               }).addTo(map);
@@ -552,35 +540,30 @@
                 return L.divIcon({
                   className: '',
                   html: '<div style="width:'+size+'px;height:'+size+'px;border-radius:50%;background:'+color+';border:2.5px solid white;box-shadow:0 1px 5px rgba(0,0,0,0.35);"></div>',
-                  iconSize: [size, size],
-                  iconAnchor: [size/2, size/2]
+                  iconSize: [size, size], iconAnchor: [size/2, size/2]
                 });
               }
-              L.marker([15.37, 75.12], {icon: makeIcon('#1a5c8a', 18)})
-                .addTo(map).bindPopup('<b>Hubli-Dharwad</b><br>IWS unpredictability &amp; child health<br>~2,000 households · 4 survey rounds');
-              L.marker([19.07, 72.87], {icon: makeIcon('#2a8fc4', 14)})
-                .addTo(map).bindPopup('<b>Mumbai</b><br>IWS reliability &amp; characterization survey');
-              L.marker([20.00, 73.79], {icon: makeIcon('#2a8fc4', 14)})
-                .addTo(map).bindPopup('<b>Nashik</b><br>IWS reliability &amp; characterization survey');
-              L.marker([17.66, 75.91], {icon: makeIcon('#2a8fc4', 14)})
-                .addTo(map).bindPopup('<b>Solapur</b><br>IWS reliability &amp; characterization survey');
-              var bounds = L.latLngBounds(cities).pad(0.25);
-              map.fitBounds(bounds);
-              setTimeout(function() { map.invalidateSize(); }, 300);
+              L.marker([15.37,75.12],{icon:makeIcon('#1a5c8a',18)}).addTo(map).bindPopup('<b>Hubli-Dharwad</b><br>IWS unpredictability &amp; health outcomes<br>~2,000 households · 4 survey rounds');
+              L.marker([19.07,72.87],{icon:makeIcon('#2a8fc4',14)}).addTo(map).bindPopup('<b>Mumbai</b><br>IWS reliability &amp; characterization survey');
+              L.marker([20.00,73.79],{icon:makeIcon('#2a8fc4',14)}).addTo(map).bindPopup('<b>Nashik</b><br>IWS reliability &amp; characterization survey');
+              L.marker([17.66,75.91],{icon:makeIcon('#2a8fc4',14)}).addTo(map).bindPopup('<b>Solapur</b><br>IWS reliability &amp; characterization survey');
+              map.fitBounds(L.latLngBounds(cities).pad(0.25));
+              setTimeout(function(){ map.invalidateSize(); }, 300);
             });
           </script>
         </div>
+      </div>
 
       <div class="res-card">
         <div class="res-label">Machine learning &amp; water infrastructure</div>
         <h3>Identifying lead service lines using machine learning</h3>
-        <p>Lead service lines are a major source of lead exposure in drinking water, particularly for children. As part of the MassDEP Water-Smart Schools Program, I am developing and evaluating guideline-based machine learning methods that can identify lead service lines from administrative and infrastructure data.</p>
+        <p>Lead service lines remain a significant source of lead contamination in drinking water systems across the United States. As part of the MassDEP Water-Smart Schools Program, I am developing and evaluating guideline-based machine learning methods that can identify lead service lines from administrative and infrastructure data, supporting regulatory compliance and remediation efforts in Massachusetts.</p>
       </div>
 
       <div class="res-card">
-        <div class="res-label">Remote sensing &amp; resilience</div>
+        <div class="res-label">Remote sensing &amp; environmental systems</div>
         <h3>Satellite data for drought resilience and policy</h3>
-        <p>As a Graduate Fellow with the Data Science for the Public Good program at the UVA Biocomplexity Institute, I applied satellite remote sensing to analyze drought resilience in the Sahel and inform economic policy decisions in Zimbabwe. This work contributed to two technical reports and live data tools.</p>
+        <p>As a Graduate Fellow with the Data Science for the Public Good program at the UVA Biocomplexity Institute, I applied satellite remote sensing to analyze drought resilience in the Sahel and inform economic policy decisions in Zimbabwe. This work resulted in two technical reports and publicly available data tools.</p>
       </div>
     </div>
 
@@ -596,7 +579,7 @@
           <span class="badge badge-sub">Revised &amp; resubmitted — Nature Water</span>
           <a href="https://www.researchsquare.com/article/rs-7519884/v1" target="_blank" style="font-size:12px;margin-left:6px">Preprint: ResearchSquare (2025) &rarr;</a>
         </div>
-        <p style="font-size:13px;color:#444;line-height:1.75;margin-top:8px">In many cities across South Asia, piped water arrives not continuously but on an unpredictable schedule — sometimes hours late, sometimes days. Using longitudinal survey data from nearly 2,000 households in Hubli-Dharwad, India, this study found that children in households where water arrived on a different day than expected had 47% higher odds of diarrhea compared to households with a predictable supply schedule. Effects were strongest among households receiving water infrequently. These findings suggest that improving schedule reliability, even within existing intermittent systems, could be a low-cost, immediate pathway to reducing waterborne disease in cities where full upgrades to continuous supply are decades away.</p>
+        <p style="font-size:13px;color:#444;line-height:1.75;margin-top:8px">In many cities across South Asia, piped water arrives not continuously but on an unpredictable schedule, sometimes hours late, sometimes days. Using longitudinal survey data from nearly 2,000 households in Hubli-Dharwad, India, this study found that children in households where water arrived on a different day than expected had 47% higher odds of diarrhea compared to households with a predictable supply schedule. Effects were strongest among households receiving water infrequently. These findings suggest that improving schedule reliability, even within existing intermittent systems, could be a low-cost, immediate pathway to reducing waterborne disease in cities where full upgrades to continuous supply are decades away.</p>
 
         <!-- Key finding callout -->
         <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;">
